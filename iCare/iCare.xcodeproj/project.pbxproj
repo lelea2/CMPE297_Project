@@ -15,6 +15,8 @@
 		6D9300FE1DEB1032005B9450 /* iCareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9300FD1DEB1032005B9450 /* iCareTests.swift */; };
 		6D9301091DEB1032005B9450 /* iCareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9301081DEB1032005B9450 /* iCareUITests.swift */; };
 		6D9301181DEB1044005B9450 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D9301171DEB1044005B9450 /* HealthKit.framework */; };
+		6D93011B1DEB4694005B9450 /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D93011A1DEB4694005B9450 /* SplashController.swift */; };
+		6D93011D1DEB4E03005B9450 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D93011C1DEB4E03005B9450 /* ProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		6D93010A1DEB1032005B9450 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D9301171DEB1044005B9450 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		6D9301191DEB1044005B9450 /* iCare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iCare.entitlements; sourceTree = "<group>"; };
+		6D93011A1DEB4694005B9450 /* SplashController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashController.swift; path = ../SplashController.swift; sourceTree = "<group>"; };
+		6D93011C1DEB4E03005B9450 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 				6D9301191DEB1044005B9450 /* iCare.entitlements */,
 				6D9300E81DEB1032005B9450 /* AppDelegate.swift */,
 				6D9300EA1DEB1032005B9450 /* ViewController.swift */,
+				6D93011A1DEB4694005B9450 /* SplashController.swift */,
+				6D93011C1DEB4E03005B9450 /* ProfileController.swift */,
 				6D9300EC1DEB1032005B9450 /* Main.storyboard */,
 				6D9300EF1DEB1032005B9450 /* Assets.xcassets */,
 				6D9300F11DEB1032005B9450 /* LaunchScreen.storyboard */,
@@ -286,6 +292,8 @@
 			files = (
 				6D9300EB1DEB1032005B9450 /* ViewController.swift in Sources */,
 				6D9300E91DEB1032005B9450 /* AppDelegate.swift in Sources */,
+				6D93011B1DEB4694005B9450 /* SplashController.swift in Sources */,
+				6D93011D1DEB4E03005B9450 /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +448,7 @@
 				CODE_SIGN_ENTITLEMENTS = iCare/iCare.entitlements;
 				DEVELOPMENT_TEAM = 6Z65K99J89;
 				INFOPLIST_FILE = iCare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cmpe297.iCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -454,6 +463,7 @@
 				CODE_SIGN_ENTITLEMENTS = iCare/iCare.entitlements;
 				DEVELOPMENT_TEAM = 6Z65K99J89;
 				INFOPLIST_FILE = iCare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cmpe297.iCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
