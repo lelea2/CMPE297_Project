@@ -54,7 +54,7 @@ class SplashController: UIViewController {
         let w = logo?.size.width
         let h = logo?.size.height
         
-        logoView.frame = CGRect( x: (screenSize.width/2) - (w!/2), y: 5, width: w!, height: h! )
+        logoView.frame = CGRect( x: (screenSize.width/2) - (w!/2), y: 5, width: w!/4, height: h!/4 )
         self.view.addSubview(logoView)
     }
 }
