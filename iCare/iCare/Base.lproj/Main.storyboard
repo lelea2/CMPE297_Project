@@ -26,7 +26,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Profile"/>
                                 <connections>
-                                    <segue destination="R8K-M4-2wN" kind="show" id="99M-Wo-cfS"/>
+                                    <segue destination="R8K-M4-2wN" kind="show" identifier="showProfile" id="99M-Wo-cfS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pok-Xq-Z62">
@@ -56,7 +56,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" id="FHU-wE-5ib"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="showApp" id="FHU-wE-5ib"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9Q-hy-48D" userLabel="First Responder" sceneMemberID="firstResponder"/>

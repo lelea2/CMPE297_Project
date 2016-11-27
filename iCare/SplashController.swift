@@ -18,9 +18,7 @@ class SplashController: UIViewController {
         addLogo()
         
         // Show the home screen after a bit. Calls the show() function.
-        _ = Timer.scheduledTimer(
-            timeInterval: 2.5, target: self, selector: #selector(UIAlertController.show), userInfo: nil, repeats: false
-        )
+        Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: "show", userInfo: false, repeats: false)
     }
     
     /*
@@ -36,6 +34,7 @@ class SplashController: UIViewController {
      */
     func addBackgroundImage() {
         let screenSize: CGRect = UIScreen.main.bounds
+
         let bg = UIImage(named: "bg_img.jpg")
         let bgView = UIImageView(image: bg)
         
