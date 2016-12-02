@@ -10,8 +10,9 @@ import CareKit
 
 enum ActivityIdentifier: String {
   case cardio
+  case outdoorWalk = "Outdoor Walk"
   case limberUp = "Limber Up"
-  case targetPractice = "Target Practice"
+  case drinkWater = "Drink Water"
   case pulse
   case temperature
 }
@@ -53,17 +54,30 @@ class CarePlanData: NSObject {
 
     init(carePlanStore: OCKCarePlanStore) {
         self.carePlanStore = carePlanStore
-    
+        let startDate = DateComponents(year: 2016, month: 01, day: 01)
+        let walkingActivity = OCKCarePlanActivity(
+            identifier: ActivityIdentifier.outdoorWalk.rawValue,
+            groupIdentifier: nil,
+            type: .intervention,
+            title: "Daily Walking",
+            text: "30 Minutes",
+            tintColor: UIColor.green(),
+            instructions: "Take a leisurely walk after lunch",
+            imageURL: nil,
+            schedule: OCKCareSchedule.weeklySchedule(withStartDate: startDate as DateComponents, occurrencesOnEachDay: [2, 1, 1, 1, 1, 1, 2]),
+            resultResettable: true,
+            userInfo: nil)
+
         let cardioActivity = OCKCarePlanActivity(
           identifier: ActivityIdentifier.cardio.rawValue,
           groupIdentifier: nil,
           type: .intervention,
           title: "Cardio",
           text: "60 Minutes",
-          tintColor: UIColor.darkOrange(),
+          tintColor: UIColor.blue(),
           instructions: "Jog at a moderate pace for an hour. If there isn't an actual one, imagine a horde of zombies behind you.",
           imageURL: nil,
-          schedule:CarePlanData.dailyScheduleRepeating(occurencesPerDay: 2),
+          schedule: CarePlanData.dailyScheduleRepeating(occurencesPerDay: 2),
           resultResettable: true,
           userInfo: nil)
     
@@ -73,7 +87,7 @@ class CarePlanData: NSObject {
           type: .intervention,
           title: "Limber Up",
           text: "Stretch Regularly",
-          tintColor: UIColor.darkOrange(),
+          tintColor: UIColor.purple(),
           instructions: "Stretch and warm up muscles in your arms, legs and back before any expected burst of activity. This is especially important if, for example, you're heading down a hill to inspect a Hostess truck.",
           imageURL: nil,
           schedule: CarePlanData.dailyScheduleRepeating(occurencesPerDay: 6),
@@ -81,15 +95,15 @@ class CarePlanData: NSObject {
           userInfo: nil)
         
         let targetPracticeActivity = OCKCarePlanActivity(
-          identifier: ActivityIdentifier.targetPractice.rawValue,
+          identifier: ActivityIdentifier.drinkWater.rawValue,
           groupIdentifier: nil,
           type: .intervention,
-          title: "Target Practice",
-          text: nil,
-          tintColor: UIColor.darkOrange(),
-          instructions: "Gather some objects that frustrated you before the apocalypse, like printers and construction barriers. Keep your eyes sharp and your arm steady, and blow as many holes as you can in them for at least five minutes.",
+          title: "Drink Water",
+          text: "Drink cup of water every 2 hours",
+          tintColor: UIColor.pink(),
+          instructions: "Make sure you have enough water yo!",
           imageURL: nil,
-          schedule: CarePlanData.dailyScheduleRepeating(occurencesPerDay: 2),
+          schedule: CarePlanData.dailyScheduleRepeating(occurencesPerDay: 8),
           resultResettable: true,
           userInfo: nil)
     
@@ -112,11 +126,8 @@ class CarePlanData: NSObject {
                       resultResettable: true,
                       schedule: CarePlanData.dailyScheduleRepeating(occurencesPerDay: 1),
                       userInfo: ["ORKTask": AssessmentTaskFactory.makeTemperatureAssessmentTask()])
-
-    
         super.init()
-    
-        for activity in [cardioActivity, limberUpActivity, targetPracticeActivity, pulseActivity, temperatureActivity] {
+        for activity in [walkingActivity, cardioActivity, limberUpActivity, targetPracticeActivity, pulseActivity, temperatureActivity] {
             add(activity: activity)
         }
     }
@@ -126,9 +137,7 @@ class CarePlanData: NSObject {
             [weak self] (success, fetchedActivity, error) in
             guard success else { return }
             guard let strongSelf = self else { return }
-
             if let _ = fetchedActivity { return }
-      
             strongSelf.carePlanStore.add(activity, completion: { _ in })
         }
     }
@@ -136,14 +145,14 @@ class CarePlanData: NSObject {
 
 extension CarePlanData {
     func generateDocumentWith(chart: OCKChart?) -> OCKDocument {
-        let intro = OCKDocumentElementParagraph(content: "I've been tracking my efforts to avoid becoming a Zombie with ZombieKit. Please check the attached report to see if you're safe around me.")
+        let intro = OCKDocumentElementParagraph(content: "I'm taking care of myself!")
     
         var documentElements: [OCKDocumentElement] = [intro]
         if let chart = chart {
             documentElements.append(OCKDocumentElementChart(chart: chart))
         }
-        let document = OCKDocument(title: "Re: Your Brains", elements: documentElements)
-        document.pageHeader = "ZombieKit: Weekly Report"
+        let document = OCKDocument(title: "Re: My activity", elements: documentElements)
+        document.pageHeader = "Weekly Inside"
         return document
     }
 }

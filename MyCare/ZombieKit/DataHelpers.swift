@@ -9,18 +9,14 @@
 import Foundation
 
 class DataHelpers {
-  
-  func normalize(_ values: [Double?]) -> [NSNumber] {
-    let valuesWithDefaults = values.map({ (value) -> Double in
-      guard let value = value else { return 0.0 }
-      return value
-    })
-    
-    guard let maxValue = valuesWithDefaults.max() , maxValue > 0.0 else {
-      return valuesWithDefaults.map({ NSNumber(value:$0) })
+    func normalize(_ values: [Double?]) -> [NSNumber] {
+        let valuesWithDefaults = values.map({ (value) -> Double in
+            guard let value = value else { return 0.0 }
+            return value
+        })
+        guard let maxValue = valuesWithDefaults.max() , maxValue > 0.0 else {
+            return valuesWithDefaults.map({ NSNumber(value:$0) })
+        }
+        return valuesWithDefaults.map({NSNumber(value: $0 / maxValue)})
     }
-    
-    return valuesWithDefaults.map({NSNumber(value: $0 / maxValue)})
-  }
-  
 }

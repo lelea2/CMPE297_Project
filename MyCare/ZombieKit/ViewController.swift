@@ -49,7 +49,7 @@ class ViewController: UITabBarController {
         let viewController = OCKCareCardViewController(carePlanStore: carePlanStoreManager.store)
         viewController.maskImage = UIImage(named: "heart")
         viewController.smallMaskImage = UIImage(named: "small-heart")
-        viewController.maskImageTintColor = UIColor.pink()
+        viewController.maskImageTintColor = UIColor.red()
         viewController.tabBarItem = UITabBarItem(title: "Care Card", image: UIImage(named: "carecard"), selectedImage: UIImage(named: "carecard-filled"))
         viewController.title = "Care Card"
         return UINavigationController(rootViewController: viewController)
@@ -59,7 +59,7 @@ class ViewController: UITabBarController {
     fileprivate func createSymptomTrackerStack() -> UINavigationController {
         let viewController = OCKSymptomTrackerViewController(carePlanStore: carePlanStoreManager.store)
         viewController.delegate = self
-        viewController.progressRingTintColor = UIColor.darkGreen()
+        viewController.progressRingTintColor = UIColor.blue()
         symptomTrackerViewController = viewController
         viewController.tabBarItem = UITabBarItem(title: "Symptom", image: UIImage(named: "symptoms"), selectedImage: UIImage.init(named: "symptoms-filled"))
         viewController.title = "Symptom"
