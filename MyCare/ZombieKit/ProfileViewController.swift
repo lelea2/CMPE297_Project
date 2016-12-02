@@ -224,7 +224,7 @@ class ProfileViewController: UITableViewController {
     private func updateUsersBloodType() {
         var bloodTypeText: String? {
             if let bloodType = try? self.healthStore?.bloodType() {
-                print(bloodType!.bloodType.rawValue)
+                //print(bloodType!.bloodType.rawValue)
                 switch bloodType!.bloodType {
                     case .aPositive:
                         print("A+ bloodtype...")
@@ -255,7 +255,7 @@ class ProfileViewController: UITableViewController {
                         break;
                 }
             }
-            return "A+"
+            return ""
         }
         if var userProfiles = self.userProfiles {
             var bloodtype: [String] = userProfiles[ProfileKeys.BloodType] as [String]!
