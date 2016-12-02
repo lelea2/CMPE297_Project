@@ -51,29 +51,25 @@ class ProfileViewController: UITableViewController
             (success, error) -> Void in
             
             if !success {
-                
                 print("You didn't allow HealthKit to access these read/write data types. In your app, try to handle this error gracefully when a user decides not to provide access. The error was: \(error). If you're using a simulator, try it on a device.")
-                
                 return
             }
 
-            DispatchQueue.main.async{
-
-                // Update the user interface based on the current user's health information.
-                self.updateUserAge()
-                self.updateUsersHeight()
-                self.updateUsersWeight()
-            }
+//            DispatchQueue.main.async {
+//                // Update the user interface based on the current user's health information.
+//                self.updateUserAge()
+//                self.updateUsersHeight()
+//                self.updateUsersWeight()
+//            }
         }
 
+        print(healthStore)
         if let healthStore = self.healthStore {
-            
             healthStore.requestAuthorization(toShare: writeDataTypes, read: readDataTypes, completion: completion)
         }
     }
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
@@ -84,8 +80,7 @@ class ProfileViewController: UITableViewController
                              ProfileKeys.Weight: [NSLocalizedString("Weight ()", comment: ""), NSLocalizedString("Not available", comment: "")]]
     }
 
-    override func didReceiveMemoryWarning()
-    {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

@@ -9,35 +9,29 @@
 import UIKit
 import HealthKit
 
-class JournalViewController: UITableViewController, FoodPickerViewControllerDelegate
-{
+class JournalViewController: UITableViewController, FoodPickerViewControllerDelegate {
 
     var healthStore: HKHealthStore?
     
     private var foodItems: Array<FoodItem>?
     
     private var energyFormatter: EnergyFormatter {
-        
         let energyFormatter = EnergyFormatter()
         energyFormatter.unitStyle = Formatter.UnitStyle.long
         energyFormatter.isForFoodEnergyUse = true
         energyFormatter.numberFormatter.maximumFractionDigits = 2
-        
         return energyFormatter
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
+    override func viewDidAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(JournalViewController.updateJournal), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
-    override func viewDidDisappear(_ animated: Bool)
-    {
+    override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -52,16 +46,14 @@ class JournalViewController: UITableViewController, FoodPickerViewControllerDele
         self.updateJournal()
     }
 
-    override func didReceiveMemoryWarning()
-    {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     //MARK: - Button Action
     
-    @IBAction func pickFood(sender: AnyObject)
-    {
+    @IBAction func pickFood(sender: AnyObject) {
         let pickFoodViewController = FoodPickerViewController(style: UITableViewStyle.plain)
         pickFoodViewController.delegate = self
         
@@ -71,8 +63,7 @@ class JournalViewController: UITableViewController, FoodPickerViewControllerDele
     //MARK: - Reading HealthKit Data
     
     // Use for someone selector, can not be private.
-    func updateJournal()
-    {
+    func updateJournal() {
         let calendar = Calendar.current
         let nowDate = Date()
         
@@ -150,7 +141,6 @@ class JournalViewController: UITableViewController, FoodPickerViewControllerDele
                 
                 if !success {
                     print("An error occured saving the food %@. In your app, try to handle this gracefully. The error was: \(error)")
-                    
                     return
                 }
                 
