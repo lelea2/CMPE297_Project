@@ -32,32 +32,10 @@ class ViewController: UITabBarController {
                                 symptomTrackerStack,
                                 insightsStack,
                                 connectStack]
-        tabBar.tintColor = UIColor.darkOrange()
+        tabBar.tintColor = UIColor.pink()
         tabBar.barTintColor = UIColor.lightGreen()
     }
 
-
-    //MARK: HealthKit Permissions
-    //Write healthkit data
-    private func dataTypesToWrite() -> Set<HKSampleType> {
-        let dietaryCalorieEnergyType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryEnergyConsumed)!
-        let activeEnergyBurnType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!
-        let heightType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!
-        let weightType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!
-        let writeDataTypes: Set<HKSampleType> = [dietaryCalorieEnergyType, activeEnergyBurnType, heightType, weightType]
-        return writeDataTypes
-    }
-    //Read healthkit data
-    private func dataTypesToRead() -> Set<HKObjectType> {
-        let dietaryCalorieEnergyType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryEnergyConsumed)!
-        let activeEnergyBurnType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!
-        let heightType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!
-        let weightType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!
-        let birthdayType = HKQuantityType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.dateOfBirth)!
-        let biologicalSexType = HKQuantityType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.biologicalSex)!
-        let readDataTypes: Set<HKObjectType> = [dietaryCalorieEnergyType, activeEnergyBurnType, heightType, weightType, birthdayType, biologicalSexType]
-        return readDataTypes
-    }
 
     //Render my own info
     fileprivate func createInfoStack() -> UINavigationController {

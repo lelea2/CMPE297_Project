@@ -334,41 +334,31 @@ class ProfileViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let CellIdentifier: String = "CellIdentifier"
-
         var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: CellIdentifier)
-
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: CellIdentifier)
         }
-
         var profilekey: ProfileKeys?
 
         switch indexPath.row {
         case 0:
             profilekey = .Age
-
         case 1:
             profilekey = .Height
-
         case 2:
             profilekey = .Weight
-
         default:
             break
         }
-
         if let profiles = self.userProfiles {
             let profile: [String] = profiles[profilekey!] as [String]!
-
             cell!.textLabel!.text = profile.first as String!
             cell!.detailTextLabel!.text = profile.last as String!
         }
-
         return cell!
     }
 
     //MARK: - UITableView Delegate Methods
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index: ProfileViewControllerTableViewIndex = ProfileViewControllerTableViewIndex(rawValue: indexPath.row)!
 
@@ -377,7 +367,6 @@ class ProfileViewController: UITableViewController {
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
-
         // Set up variables based on what row the user has selected.
         var title: String?
         var valueChangedHandler: ((Double) -> Void)?
