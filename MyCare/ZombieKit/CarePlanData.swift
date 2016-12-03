@@ -16,6 +16,7 @@ enum ActivityIdentifier: String {
     case drinkVitamin = "Drink Vitamin"
     case pulse
     case temperature
+    case glucose
 }
 
 class CarePlanData: NSObject {
@@ -150,8 +151,19 @@ class CarePlanData: NSObject {
                       resultResettable: true,
                       schedule: CarePlanData.dailyScheduleRepeating(occurencesPerDay: 1),
                       userInfo: ["ORKTask": AssessmentTaskFactory.makeTemperatureAssessmentTask()])
+
+        let glucoseActivity = OCKCarePlanActivity
+            .assessment(withIdentifier: ActivityIdentifier.glucose.rawValue,
+                        groupIdentifier: nil,
+                        title: "Glucose",
+                        text: "Enter your Glucose for the day",
+                        tintColor: UIColor.purple(),
+                        resultResettable: true,
+                        schedule: CarePlanData.dailyScheduleRepeating(occurencesPerDay: 1),
+                        userInfo: ["ORKTask": AssessmentTaskFactory.makeGlucoseAssessmentTask()])
+
         super.init()
-        for activity in [walkingActivity, cardioActivity, limberUpActivity, drinkWaterActivity, takeVitaminActivity, pulseActivity, temperatureActivity] {
+        for activity in [walkingActivity, cardioActivity, limberUpActivity, drinkWaterActivity, takeVitaminActivity, glucoseActivity, pulseActivity, temperatureActivity] {
             add(activity: activity)
         }
     }
