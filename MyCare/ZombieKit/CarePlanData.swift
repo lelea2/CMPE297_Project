@@ -21,31 +21,40 @@ class CarePlanData: NSObject {
     let carePlanStore: OCKCarePlanStore
     let contacts =
         [OCKContact(contactType: .personal,
-                name: "Shaun Riley",
+                name: "Kareen Dao",
                 relation: "Friend",
                 tintColor: nil,
-                phoneNumber: CNPhoneNumber(stringValue: "888-555-5512"),
-                messageNumber: CNPhoneNumber(stringValue: "888-555-5512"),
-                emailAddress: "shaunofthedead@example.com",
-                monogram: "SR",
+                phoneNumber: CNPhoneNumber(stringValue: "800-123-4567"),
+                messageNumber: CNPhoneNumber(stringValue: "800-123-4567"),
+                emailAddress: "ktest@test.com",
+                monogram: "KD",
                 image: nil),
+         OCKContact(contactType: .personal,
+                    name: "Tiffany Dao",
+                    relation: "Sister",
+                    tintColor: nil,
+                    phoneNumber: CNPhoneNumber(stringValue: "800-123-4567"),
+                    messageNumber: CNPhoneNumber(stringValue: "800-123-4567"),
+                    emailAddress: "tdtest@test.com",
+                    monogram: "TD",
+                    image: nil),
          OCKContact(contactType: .careTeam,
-                name: "Columbus Ohio",
+                name: "Jane Do",
                 relation: "Therapist",
                 tintColor: nil,
-                phoneNumber: CNPhoneNumber(stringValue: "888-555-5235"),
-                messageNumber: CNPhoneNumber(stringValue: "888-555-5235"),
-                emailAddress: "columbus@example.com",
-                monogram: "CO",
+                phoneNumber: CNPhoneNumber(stringValue: "800-123-4567"),
+                messageNumber: CNPhoneNumber(stringValue: "800-123-4567"),
+                emailAddress: "jdo@test.com",
+                monogram: "JD",
                 image: nil),
          OCKContact(contactType: .careTeam,
-                name: "Dr Hershel Greene",
+                name: "Dr Sammantha Green",
                 relation: "Veterinarian",
                 tintColor: nil,
-                phoneNumber: CNPhoneNumber(stringValue: "888-555-2351"),
-                messageNumber: CNPhoneNumber(stringValue: "888-555-2351"),
-                emailAddress: "dr.hershel@example.com",
-                monogram: "HG",
+                phoneNumber: CNPhoneNumber(stringValue: "800-123-4567"),
+                messageNumber: CNPhoneNumber(stringValue: "800-123-4567"),
+                emailAddress: "dr.sg@test.com",
+                monogram: "SG",
                 image: nil)]
 
     class func dailyScheduleRepeating(occurencesPerDay: UInt) -> OCKCareSchedule {
@@ -145,7 +154,7 @@ class CarePlanData: NSObject {
 
 extension CarePlanData {
     func generateDocumentWith(chart: OCKChart?) -> OCKDocument {
-        let intro = OCKDocumentElementParagraph(content: "I'm taking care of myself!")
+        let intro = OCKDocumentElementParagraph(content: "See, I'm taking care of myself!")
     
         var documentElements: [OCKDocumentElement] = [intro]
         if let chart = chart {
