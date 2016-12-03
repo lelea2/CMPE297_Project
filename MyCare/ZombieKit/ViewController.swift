@@ -23,11 +23,13 @@ class ViewController: UITabBarController {
         carePlanStoreManager.delegate = self
         carePlanStoreManager.updateInsights()
         let infoStack = createInfoStack()
+        let mealStack = createMealStack()
         let careCardStack = createCareCardStack()
         let symptomTrackerStack = createSymptomTrackerStack()
         let insightsStack = createInsightsStack()
         let connectStack = createConnectStack()
         self.viewControllers = [infoStack,
+                                mealStack,
                                 careCardStack,
                                 symptomTrackerStack,
                                 insightsStack,
@@ -43,6 +45,15 @@ class ViewController: UITabBarController {
         viewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile"), selectedImage: UIImage(named: "profile"))
         return UINavigationController(rootViewController : viewController)
     }
+
+    //Render food intake
+    //Render my own info
+    fileprivate func createMealStack() -> UINavigationController {
+        let viewController = FoodViewController()
+        viewController.tabBarItem = UITabBarItem(title: "Meal", image: UIImage(named: "journal"), selectedImage: UIImage(named: "journal"))
+        return UINavigationController(rootViewController : viewController)
+    }
+
 
     //Render care card
     fileprivate func createCareCardStack() -> UINavigationController {
