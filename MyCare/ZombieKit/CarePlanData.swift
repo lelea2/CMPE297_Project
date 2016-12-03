@@ -9,12 +9,13 @@
 import CareKit
 
 enum ActivityIdentifier: String {
-  case cardio
-  case outdoorWalk = "Outdoor Walk"
-  case limberUp = "Limber Up"
-  case drinkWater = "Drink Water"
-  case pulse
-  case temperature
+    case cardio
+    case outdoorWalk = "Outdoor Walk"
+    case limberUp = "Limber Up"
+    case drinkWater = "Drink Water"
+    case drinkVitamin = "Drink Vitamin"
+    case pulse
+    case temperature
 }
 
 class CarePlanData: NSObject {
@@ -103,7 +104,7 @@ class CarePlanData: NSObject {
           resultResettable: true,
           userInfo: nil)
         
-        let targetPracticeActivity = OCKCarePlanActivity(
+        let drinkWaterActivity = OCKCarePlanActivity(
           identifier: ActivityIdentifier.drinkWater.rawValue,
           groupIdentifier: nil,
           type: .intervention,
@@ -115,6 +116,20 @@ class CarePlanData: NSObject {
           schedule: CarePlanData.dailyScheduleRepeating(occurencesPerDay: 8),
           resultResettable: true,
           userInfo: nil)
+
+        let takeVitaminActivity = OCKCarePlanActivity(
+            identifier: ActivityIdentifier.drinkVitamin.rawValue,
+            groupIdentifier: nil,
+            type: .intervention,
+            title: "Drink Vitamin",
+            text: "Take vitamin D and C",
+            tintColor: UIColor.yellow(),
+            instructions: "Drink your vitamin",
+            imageURL: nil,
+            schedule:CarePlanData.dailyScheduleRepeating(occurencesPerDay: 2),
+            resultResettable: true,
+            userInfo: nil)
+
     
         let pulseActivity = OCKCarePlanActivity
           .assessment(withIdentifier: ActivityIdentifier.pulse.rawValue,
@@ -136,7 +151,7 @@ class CarePlanData: NSObject {
                       schedule: CarePlanData.dailyScheduleRepeating(occurencesPerDay: 1),
                       userInfo: ["ORKTask": AssessmentTaskFactory.makeTemperatureAssessmentTask()])
         super.init()
-        for activity in [walkingActivity, cardioActivity, limberUpActivity, targetPracticeActivity, pulseActivity, temperatureActivity] {
+        for activity in [walkingActivity, cardioActivity, limberUpActivity, drinkWaterActivity, takeVitaminActivity, pulseActivity, temperatureActivity] {
             add(activity: activity)
         }
     }
