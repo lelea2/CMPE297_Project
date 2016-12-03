@@ -53,9 +53,7 @@ class FoodViewController: UITableViewController, FoodPickerViewControllerDelegat
         self.navigationController?.pushViewController(pickFoodViewController, animated: true)
     }
 
-    //MARK: - Reading HealthKit Data
-
-    // Use for someone selector, can not be private.
+    //Update calories
     func updateCalories() {
         let calendar = Calendar.current
         let nowDate = Date()
