@@ -79,8 +79,7 @@ class ViewController: UITabBarController {
 
     //Render for insight creation
     fileprivate func createInsightsStack() -> UINavigationController {
-        let viewController = OCKInsightsViewController(insightItems: [OCKInsightItem.emptyInsightsMessage()],
-                                                   headerTitle: "Zombie Check", headerSubtitle: "")
+        let viewController = OCKInsightsViewController(insightItems: [OCKInsightItem.emptyInsightsMessage()], headerTitle: "", headerSubtitle: "")
         insightsViewController = viewController
         viewController.tabBarItem = UITabBarItem(title: "Insights", image: UIImage(named: "insights"), selectedImage: UIImage.init(named: "insights-filled"))
         viewController.title = "Insights"

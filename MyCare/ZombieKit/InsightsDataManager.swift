@@ -14,23 +14,19 @@ class InsightsDataManager {
     let gatherDataGroup = DispatchGroup()
     var pulseData = [DateComponents: Double]()
     var temperatureData = [DateComponents: Double]()
-
     var completionSeries: OCKBarSeries {
         let completionValues = completionData.map({ NSNumber(value:$0.value) })
-    
         let completionValueLabels = completionValues
             .map({ NumberFormatter.localizedString(from: $0, number: .percent)})
-    
         return OCKBarSeries(
-            title: "Training",
+            title: "My Care",
             values: completionValues,
             valueLabels: completionValueLabels,
-            tintColor: UIColor.darkOrange())
+            tintColor: UIColor.pink())
     }
 
     func fetchDailyCompletion(startDate: DateComponents, endDate: DateComponents) {
         gatherDataGroup.enter()
-
         store.dailyCompletionStatus(
             with: .intervention,
             startDate: startDate,
@@ -67,7 +63,32 @@ class InsightsDataManager {
             })
         }
     }
-  
+
+    //Find result for activity
+    func fetchActivityResultsFor(_ activity: OCKCarePlanActivity,
+                                 startDate: DateComponents, endDate: DateComponents,
+                                 completionClosure: @escaping (_ fetchedData: [DateComponents: Double]) ->()) {
+        var fetchedData = [DateComponents: Double]()
+        self.gatherDataGroup.enter()
+        store.enumerateEvents(
+            of: activity,
+            startDate: startDate,
+            endDate: endDate,
+            handler: { (event, stop) in
+                if let event = event,
+                    let result = event.result,
+                    let value = Double(result.valueString) {
+                    fetchedData[event.date] = value
+                }
+        },
+            completion: { (success, error) in
+                guard success else { fatalError(error!.localizedDescription) }
+                completionClosure(fetchedData)
+                self.gatherDataGroup.leave()
+        })
+    }
+
+    //Helper function to draw bar series
     func barSeriesFor(data: [DateComponents: Double], title: String, tintColor: UIColor) -> OCKBarSeries {
         let rawValues = completionData.map({ (entry) -> Double? in
             return data[entry.dateComponent]
@@ -90,21 +111,20 @@ class InsightsDataManager {
                 else { return "" }
             return DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
         })
-        let pulseAssessmentSeries = barSeriesFor(data: pulseData, title: "Pulse",
-                                                 tintColor: UIColor.darkGreen())
-        let temperatureAssessmentSeries = barSeriesFor(data: temperatureData, title: "Temperature",
-                                                       tintColor: UIColor.darkYellow())
+        let pulseAssessmentSeries = barSeriesFor(data: pulseData, title: "Pulse", tintColor: UIColor.purple())
+        let temperatureAssessmentSeries = barSeriesFor(data: temperatureData, title: "Temperature", tintColor: UIColor.blue())
         // Create chart from completion and assessment series
         let chart = OCKBarChart(
-          title: "Zombie Training Plan",
-          text: "Training Compliance and Zombie Risks",
-          tintColor: UIColor.green(),
-          axisTitles: dateStrings,
-          axisSubtitles: nil,
-          dataSeries: [completionSeries, temperatureAssessmentSeries, pulseAssessmentSeries])
+        title: nil,
+            text: nil,
+            tintColor: UIColor.green(),
+            axisTitles: dateStrings,
+            axisSubtitles: nil,
+            dataSeries: [completionSeries, temperatureAssessmentSeries, pulseAssessmentSeries])
         return [chart]
     }
-  
+
+    //Find activity based on case
     func findActivityWith(_ activityIdentifier: ActivityIdentifier) -> OCKCarePlanActivity? {
         let semaphore = DispatchSemaphore(value: 0)
         var activity: OCKCarePlanActivity?
@@ -116,28 +136,5 @@ class InsightsDataManager {
         }
         let _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         return activity
-    }
-  
-    func fetchActivityResultsFor(_ activity: OCKCarePlanActivity,
-                               startDate: DateComponents, endDate: DateComponents,
-                               completionClosure: @escaping (_ fetchedData: [DateComponents: Double]) ->()) {
-        var fetchedData = [DateComponents: Double]()
-        self.gatherDataGroup.enter()
-        store.enumerateEvents(
-            of: activity,
-            startDate: startDate,
-            endDate: endDate,
-            handler: { (event, stop) in
-                if let event = event,
-                    let result = event.result,
-                    let value = Double(result.valueString) {
-                    fetchedData[event.date] = value
-                }
-            },
-            completion: { (success, error) in
-                guard success else { fatalError(error!.localizedDescription) }
-                completionClosure(fetchedData)
-                self.gatherDataGroup.leave()
-        })
     }
 }
